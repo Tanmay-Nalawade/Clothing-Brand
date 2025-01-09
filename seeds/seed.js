@@ -18,9 +18,21 @@ db.once("open", () => {
 });
 
 const seedDB = async () => {
+  // Clear existing data
   await Item.deleteMany({});
-  // Because the schema is in the same format as the dataset that we have so we put it directly(Format of title, price, description, size)
-  await Item.insertMany(shirts);
+  console.log("Existing items deleted.");
+
+  // Loop through the shirts array and save each item
+  for (i = 0; i < shirts.length; i++) {
+    const shirt = new Item({
+      title: `${shirts[i].title}`,
+      price: `${shirts[i].price}`,
+      description: `${shirts[i].description}`,
+      size: `${shirts[i].size}`,
+    });
+    await shirt.save();
+    console.log(`Seeded: ${shirts[i].title}`);
+  }
   // To close the connection
   mongoose.connection.close();
 };

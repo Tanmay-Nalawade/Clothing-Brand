@@ -29,13 +29,12 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/newitem", async (req, res) => {
-  const item = new Item({
-    title: "Turtle neck",
-    description: "Black with small size",
-  });
-  await item.save();
-  res.send(item);
+app.get("/shirts", async (req, res) => {
+  const shirts = await Item.find({});
+  for (let shirt of shirts) {
+    console.log(`${shirt.title}`);
+  }
+  res.render("items/shirts", { shirts });
 });
 
 app.listen(3000, () => {
