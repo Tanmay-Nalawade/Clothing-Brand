@@ -29,12 +29,17 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/shirts", async (req, res) => {
+app.get("/items", async (req, res) => {
   const shirts = await Item.find({});
   for (let shirt of shirts) {
     console.log(`${shirt.title}`);
   }
-  res.render("items/shirts", { shirts });
+  res.render("items/index", { shirts });
+});
+
+app.get("/items/:id", async (req, res) => {
+  const item = await Item.findById(req.params.id);
+  res.render("items/show", { item });
 });
 
 app.listen(3000, () => {

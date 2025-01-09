@@ -9,7 +9,7 @@
     <h1>Shirts</h1>
     <ul>
       <% for (let shirt of shirts) { %>
-      <li><%= shirt.title %></li>
+      <li><a href="items/<%= shirt._id %>"><%= shirt.title %></a></li>
       <% } %>
     </ul>
   </body>

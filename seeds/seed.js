@@ -31,7 +31,6 @@ const seedDB = async () => {
       size: `${shirts[i].size}`,
     });
     await shirt.save();
-    console.log(`Seeded: ${shirts[i].title}`);
   }
   // To close the connection
   mongoose.connection.close();
