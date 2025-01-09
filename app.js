@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const Item = require("./models/item");
 
 mongoose.connect("mongodb://localhost:27017/Clothing-Brand", {
   useNewUrlParser: true,
@@ -26,6 +27,15 @@ app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
   res.render("home");
+});
+
+app.get("/newitem", async (req, res) => {
+  const item = new Item({
+    title: "Turtle neck",
+    description: "Black with small size",
+  });
+  await item.save();
+  res.send(item);
 });
 
 app.listen(3000, () => {
